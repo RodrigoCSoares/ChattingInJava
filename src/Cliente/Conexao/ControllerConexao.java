@@ -1,10 +1,17 @@
 package Cliente.Conexao;
 
-import Cliente.Pacote;
+import Cliente.Chat.ControllerChat;
+import Cliente.Usuario;
 import Servidor.DBOS.Sala;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
-
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
@@ -15,6 +22,8 @@ import java.util.ResourceBundle;
 public class ControllerConexao implements Initializable {
     public Button btnConectar;
     public TextField txtNick;
+    private Usuario usuario;
+    public VBox vBox;
     public ComboBox<String> cbSalas;
     private ObjectOutputStream transmissor;
     private ObjectInputStream receptor;
@@ -36,11 +45,27 @@ public class ControllerConexao implements Initializable {
 
     }
 
-    public void conectar() throws Exception{
-        Pacote pacote = new Pacote(txtNick.getText(), cbSalas.getValue());
-        transmissor.writeObject(pacote);
+    public void conectar(ActionEvent event) throws Exception{
+        usuario = new Usuario(txtNick.getText(), cbSalas.getValue());
+        transmissor.writeObject(usuario);
         transmissor.flush();
 
+        //Cria um fmlxLoader que carrega a proxima Scene
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Cliente/Chat/chat.fxml"));
+        Parent borderPaneParent = fxmlLoader.load();
+
+        //Passa os parametros necessarios para o controller da proxima Scene
+        ControllerChat controller = fxmlLoader.getController();
+        usuario.setReceptor(receptor);
+        usuario.setTransmissor(transmissor);
+        controller.setUser(usuario);
+
+        Scene borderPaneScene = new Scene(borderPaneParent);
+
+        //Mostra a proxima scene
+        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        window.setScene(borderPaneScene);
+        window.show();
     }
 
     private void populaComboBox() throws Exception{
