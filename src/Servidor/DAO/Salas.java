@@ -12,19 +12,19 @@ import static Servidor.BD.CONNECTION;
 public class Salas {
     public ArrayList<Sala> getTodasSalas() throws Exception{
         try{
-            ArrayList<Sala> salas = null;
+            ArrayList<Sala> salas = new ArrayList<>();
             String query = "SELECT * FROM Salas";
             PreparedStatement preparedStatement = BD.CONNECTION.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()){
-                salas.add(new Sala(
-                            resultSet.getString("NOME"),
-                            resultSet.getInt("CAPACIDADE")
-                ));
+                String nome = resultSet.getString("Nome");
+                int capacidade = resultSet.getInt("Capacidade");
+                Sala sala = new Sala(nome, capacidade);
+                salas.add(sala);
             }
 
-            if(salas == null)
+            if(salas.isEmpty())
                 throw new Exception("Salas nao cadastradas");
 
 
