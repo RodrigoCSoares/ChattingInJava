@@ -1,4 +1,4 @@
-package Servidor.DBOS;
+package Servidor.DBO;
 
 import Cliente.Usuario;
 

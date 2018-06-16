@@ -1,6 +1,6 @@
 package Cliente;
 
-import Servidor.DBOS.Sala;
+import Servidor.DBO.Sala;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -54,6 +54,9 @@ public class Usuario implements Serializable {
     public Sala getSala() throws IOException, ClassNotFoundException {
 
         System.out.println("PASSOU");
+        PacoteCliente pacoteCliente = new PacoteCliente();
+        pacoteCliente.intencao = 1;
+        transmissor.writeObject(pacoteCliente);
         sala = (Sala)receptor.readObject();
         System.out.println(sala.getNome());
         return sala;

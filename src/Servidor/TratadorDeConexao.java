@@ -1,6 +1,6 @@
 package Servidor;
 
-import Servidor.DBOS.Sala;
+import Servidor.DBO.Sala;
 import Cliente.Usuario;
 
 import java.io.ObjectInputStream;
@@ -40,8 +40,13 @@ public class TratadorDeConexao extends Thread {
             }
 
             //Envia a Sala para o usuario
-            transmissor.writeObject(salaDoUsuario);
-
+            while (true) {
+                PacoteCliente pacoteCliente = (PacoteCliente) receptor.readObject();
+                System.out.println("Passou");
+                if (pacoteCliente.intencao == 1) {
+                    transmissor.writeObject(salaDoUsuario);
+                }
+            }
         }catch (Exception error){
             System.err.println("Erro ao tratar conexao!");
         }

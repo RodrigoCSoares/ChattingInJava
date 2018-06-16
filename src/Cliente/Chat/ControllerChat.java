@@ -17,7 +17,6 @@ public class ControllerChat {
     public void setUser(Usuario usuario){
         this.usuario = usuario;
         System.out.println(this.usuario.getNick());
-        this.populaListViewUsuarios();
         this.gerenciaListViewUsuarios();
     }
 
