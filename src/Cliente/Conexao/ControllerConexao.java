@@ -2,6 +2,7 @@ package Cliente.Conexao;
 
 import Cliente.Chat.ControllerChat;
 import Cliente.Usuario;
+import PacoteCliente.PacoteClienteSalas;
 import Servidor.DBO.Sala;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -69,7 +70,11 @@ public class ControllerConexao implements Initializable {
     }
 
     private void populaComboBox() throws Exception{
-        ArrayList<Sala> salas = (ArrayList<Sala>) receptor.readObject();
+        System.out.println("Receiving rooms from server...");
+//        ArrayList<Sala> salas = (ArrayList<Sala>) receptor.readObject();
+        PacoteClienteSalas pacoteClienteSalas = (PacoteClienteSalas) receptor.readObject();
+        System.out.println("OK");
+        ArrayList<Sala> salas = pacoteClienteSalas.getSalas();
         for(int i=0; i<salas.size(); i++)
             cbSalas.getItems().add(salas.get(i).getNome());
 

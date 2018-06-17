@@ -34,7 +34,7 @@ public class Sala implements Serializable {
 
     public synchronized void addUsuario (Usuario usuario){
         this.usuarios.add(usuario);
-        System.out.println("\nUsuario: '"+usuario.getNick()+" 'inserido na nomeSala: '"+this.getNome()+"'");
+//        System.out.println("\nUsuario: '"+usuario.getNick()+" 'inserido na nomeSala: '"+this.getNome()+"'");
     }
 
     public ArrayList<Usuario> getUsuarios(){

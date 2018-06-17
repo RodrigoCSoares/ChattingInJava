@@ -1,5 +1,6 @@
 package Cliente;
 
+import Cliente.Conexao.ControllerConexao;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,8 +11,11 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("Conexao/conexao.fxml"));
-        primaryStage.setTitle("Hello World");
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Conexao/conexao.fxml"));
+        Parent root = fxmlLoader.load();
+        primaryStage.setTitle("Chat");
+        ControllerConexao controllerConexao = fxmlLoader.getController();
+
         primaryStage.setScene(new Scene(root, 500, 300));
         primaryStage.show();
     }

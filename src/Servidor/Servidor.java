@@ -14,11 +14,15 @@ public class Servidor {
             System.out.println("Servidor funcionando...\nPorta: "+serverSocket.getLocalPort());
 
             //ACESSAR BD
+            System.out.print("Getting rooms from DB... ");
             ArrayList<Sala> salas = BD.SALAS.getTodasSalas();
+            System.out.println("OK");
 
             for(;;){
+                System.out.print("Waiting for new clients... ");
                 Socket conexao = serverSocket.accept();
-                new TratadorDeConexao(conexao, salas).start();
+                System.out.println("OK");
+                new TratadorDeConexao(conexao, salas);
             }
         }
         catch (Exception error){
