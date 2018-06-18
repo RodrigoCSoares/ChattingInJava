@@ -47,6 +47,8 @@ public class ControllerConexao implements Initializable {
 
     public void conectar(ActionEvent event) throws Exception{
         usuario = new Usuario(txtNick.getText(), cbSalas.getValue());
+
+        //2. Envia o usuario
         transmissor.writeObject(usuario);
         transmissor.flush();
 
@@ -69,6 +71,8 @@ public class ControllerConexao implements Initializable {
     }
 
     private void populaComboBox() throws Exception{
+
+        //1. Recebe as salas do Servidor
         ArrayList<Sala> salas = (ArrayList<Sala>) receptor.readObject();
         for(int i=0; i<salas.size(); i++)
             cbSalas.getItems().add(salas.get(i).getNome());

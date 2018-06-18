@@ -51,15 +51,8 @@ public class Usuario implements Serializable {
         this.receptor = receptor;
     }
 
-    public Sala getSala() throws IOException, ClassNotFoundException {
-
-        System.out.println("PASSOU");
-        PacoteCliente pacoteCliente = new PacoteCliente();
-        pacoteCliente.intencao = 1;
-        transmissor.writeObject(pacoteCliente);
-        sala = (Sala)receptor.readObject();
-        System.out.println(sala.getNome());
-        return sala;
+    public Sala getSala(){
+        return this.sala;
     }
 
     public void setSala(Sala sala) {

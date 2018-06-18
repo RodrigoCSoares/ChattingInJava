@@ -18,7 +18,8 @@ public class Servidor {
 
             for(;;){
                 Socket conexao = serverSocket.accept();
-                new TratadorDeConexao(conexao, salas).start();
+
+                new RecebeUsuario(conexao, salas).start();
             }
         }
         catch (Exception error){
