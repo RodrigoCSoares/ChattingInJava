@@ -2,6 +2,8 @@ package Cliente.Chat;
 
 import Cliente.Usuario;
 import Servidor.DBO.Sala;
+import Servidor.Pacote.Pacote;
+import Servidor.Pacote.PacoteLogin;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
@@ -26,6 +28,7 @@ public class ControllerChat {
 
         System.out.println(this.usuario.getNick());
         this.populaListViewUsuarios();
+
     }
 
     private void populaListViewUsuarios(){
@@ -47,4 +50,5 @@ public class ControllerChat {
             System.out.println("Falha ao encontrar os usuarios da sala");
         }
     }
+
 }

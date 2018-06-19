@@ -2,6 +2,7 @@ package Servidor;
 
 import Servidor.DBO.Sala;
 import Cliente.Usuario;
+import Servidor.Pacote.PacoteLogin;
 
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -42,7 +43,14 @@ public class RecebeUsuario extends Thread {
             //3. Envia a Sala para o usuario
             transmissor.writeObject(salaDoUsuario);
 
+            //Informa todos os outros usuarios sobre o novo usuario
+            ArrayList<Usuario> usuariosDaSala = salaDoUsuario.getUsuarios();
+            PacoteLogin pacoteLogin = new PacoteLogin(usuario);
 
+
+            for(int i=0; i<usuariosDaSala.size(); i++){
+                usuariosDaSala.get(i).enviarPacote(pacoteLogin);
+            }
 
 
         }catch (Exception error){

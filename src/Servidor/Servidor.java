@@ -18,7 +18,6 @@ public class Servidor {
 
             for(;;){
                 Socket conexao = serverSocket.accept();
-
                 new RecebeUsuario(conexao, salas).start();
             }
         }

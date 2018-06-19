@@ -68,6 +68,7 @@ public class ControllerConexao implements Initializable {
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         window.setScene(borderPaneScene);
         window.show();
+
     }
 
     private void populaComboBox() throws Exception{

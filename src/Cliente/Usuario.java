@@ -1,6 +1,7 @@
 package Cliente;
 
 import Servidor.DBO.Sala;
+import Servidor.Pacote.Pacote;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -58,4 +59,14 @@ public class Usuario implements Serializable {
     public void setSala(Sala sala) {
         this.sala = sala;
     }
+
+    public void enviarPacote (Pacote pacote) throws Exception{
+        //System.out.println("Enviou pacote para: "+this.getNick());
+        this.transmissor.writeObject(pacote);
+    }
+
+    public Pacote receberPacote () throws Exception{
+        return (Pacote) this.receptor.readObject();
+    }
+
 }
